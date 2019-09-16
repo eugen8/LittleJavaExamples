@@ -2,16 +2,8 @@ package com.burianov.eugen;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.math.*;
-import java.text.*;
 import java.time.*;
-import java.time.format.*;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalField;
 import java.util.*;
-import java.util.function.Function;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class Subscription {
     public Subscription() {}
@@ -71,9 +63,10 @@ public class Billing {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate firstDayOfMonth = LocalDate.parse(month+"-01", formatter);
         LocalDate lastDayOfMonth = lastDayOfMonth(firstDayOfMonth);
-        int numberOfDays = (int) Duration.between(firstDayOfMonth.atStartOfDay(), lastDayOfMonth.atStartOfDay()).toDays()+1;
 
-        double runningTotal = Arrays.stream(users).map(it -> difference(
+        int numberOfDays = calculateBillingDuration(firstDayOfMonth, lastDayOfMonth);
+
+        double runningTotal = Arrays.stream(users).map(it -> calculateBillingDuration(
                 greaterStartDateInTheMonth(firstDayOfMonth, it.activatedOn),
                 smallerEndDateInTheMonth(lastDayOfMonth, it.deactivatedOn)) )
                 .map(value -> (double) value*activeSubscription.monthlyPriceInDollars / numberOfDays )
@@ -118,7 +111,7 @@ public class Billing {
         }
         return refDate.isAfter(subscrEndDate)?subscrEndDate:refDate;
     }
-    public static int difference(LocalDate start, LocalDate end){
+    public static int calculateBillingDuration(LocalDate start, LocalDate end){
         int result = 0;
         if(start==null || end == null){
             return 0;
