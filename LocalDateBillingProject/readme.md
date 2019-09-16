@@ -12,3 +12,5 @@ BillingTest
 * greaterStartDateInTheMonthTestNullReturnsRefdate()
 * testBillForVariedScenario()
 * greaterStartDateInTheMonthTestLaterInMoReturnsSubsrDate()
+
+TODO: there are still a few opportunities for refactoring. 
