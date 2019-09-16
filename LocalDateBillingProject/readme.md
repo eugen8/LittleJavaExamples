@@ -13,4 +13,4 @@ BillingTest
 * testBillForVariedScenario()
 * greaterStartDateInTheMonthTestLaterInMoReturnsSubsrDate()
 
-TODO: there are still a few opportunities for refactoring. 
+The project is built using IntellijIDEA. You should be able to open the project folder with the IDE and run the tests in BillingTest. It potentially might need to set-up the SDK.
