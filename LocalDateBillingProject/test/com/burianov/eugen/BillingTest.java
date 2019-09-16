@@ -19,12 +19,9 @@ class BillingTest {
 
     @BeforeEach
     void setUp() {
-        billing = new Billing();
+//        billing = new Billing();
     }
 
-    @Test
-    void billFor() {
-    }
 
     @Test
     void greaterStartDateInTheMonthTestNullReturnsRefdate() {
